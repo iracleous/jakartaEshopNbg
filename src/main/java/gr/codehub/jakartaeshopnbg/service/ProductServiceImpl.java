@@ -11,9 +11,13 @@ import java.util.List;
 
 @RequestScoped
 public class ProductServiceImpl implements ProductService {
+
+    private static final ArrayList<Product> products = new ArrayList<>();
+
     @Override
     public Product createProduct(Product product) {
-        return null;
+        products.add(product);
+        return product;
     }
 
     @Override
@@ -26,11 +30,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> readProduct() {
-        List<Product> products = new ArrayList<>();
-        Product product = new Product();
-        product.setId(20);
-        product.setName("chips");
-        products.add(product);
+
         return products;
     }
 

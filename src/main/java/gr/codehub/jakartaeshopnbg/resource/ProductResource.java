@@ -34,11 +34,29 @@ public class ProductResource {
     }
 
 //    POST localhost:8080/product
-
+    @POST
+    @Consumes("Application/json")
+    @Produces("Application/json")
+    public Product createProduct(Product product){
+        return productService.createProduct(product);
+    }
 //
 //    PUT localhost:8080/product/{productId}
+@PUT
+@Path("/{productId}")
+@Consumes("Application/json")
+@Produces("Application/json")
+public Product updateProduct(@PathParam(value="productId") int productId, Product product){
+    return productService.updateProduct(productId, product);
+}
 //    DELETE localhost:8080/product/{productId}
 
-
+    @DELETE
+    @Path("/{productId}")
+    @Consumes("Application/json")
+    @Produces("Application/json")
+    public boolean deleteProduct(@PathParam(value="productId") int productId){
+        return productService.deleteProduct( productId);
+    }
 
 }
