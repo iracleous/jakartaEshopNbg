@@ -24,21 +24,21 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product readProduct(int productId) {
-        return null;
+        return productRepository.findById(productId).get();
     }
 
     @Override
     public List<Product> readProduct() {
-        return null;
+        return productRepository.findAll();
     }
 
     @Override
     public Product updateProduct(int productId, Product product) {
-        return null;
+        return productRepository.update(productId, product).get();
     }
 
     @Override
     public boolean deleteProduct(int productId) {
-        return false;
+        return productRepository.delete(productId);
     }
 }

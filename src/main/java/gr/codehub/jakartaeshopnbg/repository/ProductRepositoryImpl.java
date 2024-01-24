@@ -24,21 +24,31 @@ public class ProductRepositoryImpl implements ProductRepository{
 
     @Override
     public List<Product> findAll() {
-        return new ArrayList<>();
+        return em
+                .createQuery("select r from Product r")
+                .getResultList();
     }
 
     @Override
     public Optional<Product> findById(int id) {
-        return Optional.empty();
+        return Optional.of(em.find(Product.class,id));
     }
 
     @Override
+    @Transactional
     public Optional<Product> update(int id, Product newValues) {
-        return Optional.empty();
+
+        Product product = em.find(Product.class,id);
+        product.setPrice(newValues.getPrice());
+        em.persist(product);
+        return Optional.of(product);
     }
 
     @Override
+    @Transactional
     public boolean delete(int id) {
-        return false;
+        Product product = em.find(Product.class,id);
+        em.remove(product);
+        return true;
     }
 }
