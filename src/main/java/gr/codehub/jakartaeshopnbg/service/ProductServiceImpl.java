@@ -1,8 +1,11 @@
 package gr.codehub.jakartaeshopnbg.service;
 
 import gr.codehub.jakartaeshopnbg.model.Product;
+import gr.codehub.jakartaeshopnbg.repository.ProductRepository;
+import gr.codehub.jakartaeshopnbg.resource.ProductResource;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jdk.jfr.Name;
 
 import java.beans.BeanProperty;
@@ -12,26 +15,21 @@ import java.util.List;
 @RequestScoped
 public class ProductServiceImpl implements ProductService {
 
-    private static final ArrayList<Product> products = new ArrayList<>();
-
+    @Inject
+    private ProductRepository productRepository;
     @Override
     public Product createProduct(Product product) {
-        products.add(product);
-        return product;
+        return productRepository.save(product).get();
     }
 
     @Override
     public Product readProduct(int productId) {
-        Product product = new Product();
-        product.setId(productId);
-        product.setName("chips");
-        return product;
+        return null;
     }
 
     @Override
     public List<Product> readProduct() {
-
-        return products;
+        return null;
     }
 
     @Override
