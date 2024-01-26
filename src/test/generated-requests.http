@@ -1,0 +1,60 @@
+###
+POST http://localhost:8080/NbgEshop/api/product
+Content-Type: application/json
+
+{
+  "name": "chips",
+  "price": 10,
+  "category": "food"
+}
+
+<> 2024-01-26T092159.200.json
+<> 2024-01-26T092016.200.json
+<> 2024-01-25T192445.200.json
+<> 2024-01-25T192125.200.json
+<> 2024-01-25T191722.200.json
+<> 2024-01-25T171225.200.json
+
+###
+GET http://localhost:8080/NbgEshop/api/product
+
+<> 2024-01-26T092224.200.json
+<> 2024-01-25T194757.200.json
+<> 2024-01-25T191714.200.json
+<> 2024-01-25T171449.200.json
+<> 2024-01-25T171237.200.json
+<> 2024-01-25T171150.200.json
+
+
+###
+GET http://localhost:8080/NbgEshop/api/product/2
+
+<> 2024-01-26T092251.200.json
+<> 2024-01-25T171303.200.json
+<> 2024-01-25T171250.200.json
+
+###
+PUT http://localhost:8080/NbgEshop/api/product/2
+Content-Type: application/json
+
+{
+ "price": 1.30
+}
+
+<> 2024-01-26T092413.500.json
+<> 2024-01-26T092334.200.json
+<> 2024-01-25T171426.200.json
+<> 2024-01-25T171348.400.json
+
+###
+DELETE http://localhost:8080/NbgEshop/api/product/2
+
+<> 2024-01-26T092355.500.json
+<> 2024-01-26T092351.200.json
+<> 2024-01-25T171534.200.json
+<> 2024-01-25T171530.200.json
+
+
+###
+GET http://localhost:8080/NbgEshop/api/hello-world
+
