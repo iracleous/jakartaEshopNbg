@@ -3,7 +3,7 @@ POST http://localhost:8080/NbgEshop/api/product
 Content-Type: application/json
 
 {
-  "name": "chips",
+  "name": "chocos",
   "price": 10,
   "category": "food"
 }

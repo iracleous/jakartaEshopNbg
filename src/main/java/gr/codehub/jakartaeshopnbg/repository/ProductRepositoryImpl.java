@@ -31,7 +31,15 @@ public class ProductRepositoryImpl implements ProductRepository{
 
     @Override
     public Optional<Product> findById(int id) {
-        return Optional.of(em.find(Product.class,id));
+        Product product;
+        try{
+            product=em.find(Product.class,id);
+            return Optional.of(product);
+        }
+        catch(Exception e){
+            return Optional.empty();
+        }
+
     }
 
     @Override
