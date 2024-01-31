@@ -18,15 +18,25 @@ public class ProductRepositoryImpl implements ProductRepository{
     @Override
     @Transactional
     public Optional<Product> save(Product product) {
-        em.persist(product);
-        return Optional.of(product);
+        try {
+            em.persist(product);
+            return Optional.of(product);
+        }
+        catch(Exception e){
+            return Optional.empty();
+        }
     }
 
     @Override
     public List<Product> findAll() {
-        return em
-                .createQuery("select r from Product r")
-                .getResultList();
+        try {
+            return em
+                    .createQuery("select r from Product r")
+                    .getResultList();
+        }
+        catch(Exception e){
+            return new ArrayList<>();
+        }
     }
 
     @Override
@@ -39,24 +49,32 @@ public class ProductRepositoryImpl implements ProductRepository{
         catch(Exception e){
             return Optional.empty();
         }
-
     }
 
     @Override
     @Transactional
     public Optional<Product> update(int id, Product newValues) {
-
-        Product product = em.find(Product.class,id);
-        product.setPrice(newValues.getPrice());
-        em.persist(product);
-        return Optional.of(product);
+        try {
+            Product product = em.find(Product.class, id);
+            product.setPrice(newValues.getPrice());
+            em.persist(product);
+            return Optional.of(product);
+        }
+        catch(Exception e){
+            return Optional.empty();
+        }
     }
 
     @Override
     @Transactional
     public boolean delete(int id) {
-        Product product = em.find(Product.class,id);
-        em.remove(product);
-        return true;
+        try {
+            Product product = em.find(Product.class, id);
+            em.remove(product);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
     }
 }

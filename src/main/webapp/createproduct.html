@@ -6,23 +6,20 @@
 </head>
 <body>
 
+    <h1>Product details</h1>
+    <form action="doCreate" method="POST">
+       <table>
+            <tr><td> Name  </td><td> <input type="text" id="name" name="name" placeholder="name"></td></tr>
+            <tr><td>  Price </td><td> <input type="number" id="price" name="price" placeholder="price"></td></tr>
+            <tr><td>  Category</td><td> <input type="text" id="category" name="category" placeholder="category"></td></tr>
+            <tr><td> <input type="submit" value="Create product"></td></tr>
+            <tr><td> <input type="button" value="Create Product Async" onclick="CreateProduct()"></td></tr>
+       </table>
+    </form>
+    <div id="resultDiv"></div>
+    <hr>
+    <a href="index.html">Back to index</a>
 
-
-
-
-
-
-
-
-Product details
-<form action="doCreate" method="POST">
-   <table>
-   <tr><td> Name  </td><td> <input type="text" name="name" placeholder="name"></td></tr>
-       <tr><td>  Price </td><td> <input type="number" name="price" placeholder="price"></td></tr>
-       <tr><td>  Category</td><td> <input type="text" name="category" placeholder="category"></td></tr>
-
-   <tr><td> <input type="submit" value="Create product"></td></tr>
-   </table>
-</form>
+    <script src="js/utils.js"> </script>
 </body>
 </html>

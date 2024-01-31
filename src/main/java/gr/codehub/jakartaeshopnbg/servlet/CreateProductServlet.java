@@ -20,8 +20,7 @@ public class CreateProductServlet extends HttpServlet {
         String name = request.getParameter("name");
         double price = 0;
         try {
-
-           price= Double.parseDouble(request.getParameter("price"));
+           price = Double.parseDouble(request.getParameter("price"));
         }
         catch(Exception e){}
         String category = request.getParameter("category");
