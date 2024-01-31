@@ -30,6 +30,7 @@ public class ProductResource {
     @Consumes("Application/json")
     @Produces("Application/json")
     public List<Product> getProduct(){
+
         return productService.readProduct();
     }
 

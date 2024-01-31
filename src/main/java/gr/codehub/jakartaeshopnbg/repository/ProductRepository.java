@@ -1,14 +1,36 @@
 package gr.codehub.jakartaeshopnbg.repository;
 
 import gr.codehub.jakartaeshopnbg.model.Product;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.transaction.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface ProductRepository {
-    Optional<Product> save(Product product);
-    List<Product> findAll();
-    Optional<Product> findById(int id);
-    Optional<Product> update(int id, Product newValues);
-    boolean delete(int id);
+@RequestScoped
+public class ProductRepository extends GenericRepositoryImpl<Product, Integer>{
+    @Override
+    public String getClassName() {
+        var name = Product.class.getSimpleName();
+        return name ;
+    }
+
+    @Override
+    public Class<Product> getClassType() {
+        return Product.class;
+    }
+
+    @Override
+    @Transactional
+    public Optional<Product> update(Integer id, Product newValues) {
+        try {
+            Product product = findById(id).get();
+            product.setPrice(newValues.getPrice());
+            em.persist(product);
+            return Optional.of(product);
+        }
+        catch(Exception e) {
+            return Optional.empty();
+        }
+    }
+
 }

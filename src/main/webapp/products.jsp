@@ -11,15 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-
-
-
-
-
-
-
 <%
-
     String greeting = "hello";
     out.println(greeting);
 %>
