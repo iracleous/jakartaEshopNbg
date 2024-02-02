@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class BasketDto {
-    private int customerId;
+    private long customerId;
 }

@@ -1,19 +1,16 @@
 package gr.codehub.jakartaeshopnbg.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
-
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Customer extends BaseModel{
     private String name;
     private String email;
+    @OneToMany(mappedBy ="customer", fetch = FetchType.LAZY)
+    private List<Basket> baskets;
 }

@@ -8,7 +8,7 @@ import jakarta.transaction.Transactional;
 import java.util.Optional;
 
 @RequestScoped
-public class CustomerRepository extends GenericRepositoryImpl<Customer, Integer> {
+public class CustomerRepository extends GenericRepositoryImpl<Customer, Long> {
     @Override
     public String getClassName() {
         return Customer.class.getSimpleName();
@@ -21,7 +21,7 @@ public class CustomerRepository extends GenericRepositoryImpl<Customer, Integer>
 
     @Override
     @Transactional
-    public Optional<Customer> update(Integer id, Customer newValues) {
+    public Optional<Customer> update(Long id, Customer newValues) {
         try {
             Customer customer = findById(id).get();
             customer.setEmail(newValues.getEmail());

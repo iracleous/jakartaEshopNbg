@@ -13,32 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequestScoped
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl extends GenericServiceImpl<Product, Long>  implements ProductService {
 
-    @Inject
-    private ProductRepository productRepository;
-    @Override
-    public Product createProduct(Product product) {
-        return productRepository.save(product).get();
-    }
-
-    @Override
-    public Product readProduct(int productId) {
-        return productRepository.findById(productId).get();
-    }
-
-    @Override
-    public List<Product> readProduct() {
-        return productRepository.findAll();
-    }
-
-    @Override
-    public Product updateProduct(int productId, Product product) {
-        return productRepository.update(productId, product).get();
-    }
-
-    @Override
-    public boolean deleteProduct(int productId) {
-        return productRepository.delete(productId);
-    }
 }

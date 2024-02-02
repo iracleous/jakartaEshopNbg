@@ -22,7 +22,7 @@ public class ProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter writer = response.getWriter();
 
-        Optional<Product> product =productRepository.findById(1);
+        Optional<Product> product =productRepository.findById(1l);
 
         writer.append("""
         <html>

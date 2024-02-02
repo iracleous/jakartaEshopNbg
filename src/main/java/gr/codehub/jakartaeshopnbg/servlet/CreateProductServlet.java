@@ -1,6 +1,7 @@
 package gr.codehub.jakartaeshopnbg.servlet;
 
 import gr.codehub.jakartaeshopnbg.model.Product;
+import gr.codehub.jakartaeshopnbg.service.GenericService;
 import gr.codehub.jakartaeshopnbg.service.ProductService;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
@@ -25,8 +26,8 @@ public class CreateProductServlet extends HttpServlet {
         catch(Exception e){}
         String category = request.getParameter("category");
 
-        Product product = new Product(0, category, price, name);
-        productService.createProduct(product);
+        Product product = new Product( category, price, name);
+        productService.createT(product);
         response.getWriter().append("<html><body>");
         response.getWriter().append("product with id = " +product.getId() +" has been saved");
         response.getWriter().append("<br> <a href='.'> Return to index </a>");

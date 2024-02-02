@@ -7,7 +7,7 @@ import jakarta.transaction.Transactional;
 import java.util.Optional;
 
 @RequestScoped
-public class ProductRepository extends GenericRepositoryImpl<Product, Integer>{
+public class ProductRepository extends GenericRepositoryImpl<Product, Long>{
     @Override
     public String getClassName() {
         var name = Product.class.getSimpleName();
@@ -21,7 +21,7 @@ public class ProductRepository extends GenericRepositoryImpl<Product, Integer>{
 
     @Override
     @Transactional
-    public Optional<Product> update(Integer id, Product newValues) {
+    public Optional<Product> update(Long id, Product newValues) {
         try {
             Product product = findById(id).get();
             product.setPrice(newValues.getPrice());

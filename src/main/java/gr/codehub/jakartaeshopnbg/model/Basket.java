@@ -10,17 +10,11 @@ import java.util.List;
 
 @Data
 @Entity
-public class Basket {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+public class Basket extends BaseModel{
     private LocalDateTime timeStamp;
-
     @ManyToOne
     @NotNull
     private Customer customer;
-
     @ManyToMany
     private List<Product> products;
 }

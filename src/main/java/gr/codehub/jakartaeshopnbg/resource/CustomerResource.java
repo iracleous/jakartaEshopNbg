@@ -17,8 +17,8 @@ public class CustomerResource {
     @Path("/{customerId}")
     @Consumes("Application/json")
     @Produces("Application/json")
-    public Customer getCustomer(@PathParam(value="customerId") int customerId){
-        return customerService.readCustomer(customerId);
+    public Customer getCustomer(@PathParam(value="customerId") long customerId){
+        return customerService.readT(customerId);
     }
 
     //    GET localhost:8080/customer
@@ -27,7 +27,7 @@ public class CustomerResource {
     @Consumes("Application/json")
     @Produces("Application/json")
     public List<Customer> getCustomer(){
-        return customerService.readCustomer();
+        return customerService.readT();
     }
 
     //    POST localhost:8080/customer
@@ -35,7 +35,7 @@ public class CustomerResource {
     @Consumes("Application/json")
     @Produces("Application/json")
     public Customer createCustomer(Customer customer){
-        return customerService.createCustomer(customer);
+        return customerService.createT(customer);
     }
     //
 //    PUT localhost:8080/customer/{customerId}
@@ -43,8 +43,8 @@ public class CustomerResource {
     @Path("/{customerId}")
     @Consumes("Application/json")
     @Produces("Application/json")
-    public Customer updateCustomer(@PathParam(value="customerId") int customerId, Customer customer){
-        return customerService.updateCustomer(customerId, customer);
+    public Customer updateCustomer(@PathParam(value="customerId") long customerId, Customer customer){
+        return customerService.updateT(customerId, customer);
     }
 //    DELETE localhost:8080/customer/{customerId}
 
@@ -52,8 +52,8 @@ public class CustomerResource {
     @Path("/{customerId}")
     @Consumes("Application/json")
     @Produces("Application/json")
-    public boolean deleteCustomer(@PathParam(value="customerId") int customerId){
-        return customerService.deleteCustomer( customerId);
+    public boolean deleteCustomer(@PathParam(value="customerId") long customerId){
+        return customerService.deleteT( customerId);
     }
 
 }
