@@ -3,15 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <title>Product creation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        options =[{"text":"FOOD", "value":"FOOD"}, {"text":"FOOD2", "value":"FOOD2"}, {"text":"FOOD3", "value":"FOOD3"}];
+        options = getProductCategories();
+            // $.each(options, function(index,value) {
+            //     option = new Option(value.text, value.value);
+            //     $("#category").append(option);
+            // })
+        });
+
+
+    function getProductCategories(){
+        uri = "http://localhost:8080/NbgEshop/api/util/categories"
+        fetch(uri, {
+            method: "GET", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: "same-origin", // include, *same-origin, omit
+            headers: {
+                "Content-Type": "application/json",
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+         //   body: JSON.stringify(data), // body data type must match "Content-Type" header
+        })
+            .then(res => res.json())
+            .then(options => {
+
+                $.each(options, function(index,value) {
+                    option = new Option(value.text, value.value);
+                    $("#category").append(option);
+                })
+            })
+            .catch(error => {
+                if (error instanceof TypeError && error.message.includes('API key')) {
+                    console.error('Invalid API key:', error);
+                   return [];
+                } else {
+                    console.error('There was a problem with the Fetch operation:', error);
+                    return [];
+                }
+            });
+    }
+
+
+    function validateSubmit(){
+       if($("#price").val()=='')   {
+           alert("price is empty");
+           $("#price").focus();
+           return false;
+       }
+
+ ///TODO
+       if($("#category:selected").val()=="-"){
+           alert("no category has been selected");
+           $("#category").focus();
+           return false;
+       }
+
+        return true;
+    }
+</script>
+
 </head>
 <body>
 
+
     <h1>Product details</h1>
-    <form action="doCreate" method="POST">
+    <form action="doCreate" method="POST" onsubmit=" return validateSubmit()">
        <table>
             <tr><td> Name  </td><td> <input type="text" id="name" name="name" placeholder="name"></td></tr>
             <tr><td>  Price </td><td> <input type="number" id="price" name="price" placeholder="price"></td></tr>
-            <tr><td>  Category</td><td> <input type="text" id="category" name="category" placeholder="category"></td></tr>
+            <tr><td>  Category</td><td>
+                <select id="category" name="category" >
+                    <option value="-" selected disabled > --- Select category --- </option>
+<!--                     <option value="FOOD">FOOD</option>-->
+<!--                    <option value="SNACK">SNACK</option>-->
+<!--                     <option value="BEVERAGE">BEVERAGE</option>-->
+<!--                    <option value="UTILITY">UTILITY</option>-->
+                </select>
+
+<!--                <input type="text" id="category" name="category" placeholder="category"></td>-->
+
+            </tr>
 
             <tr><td> <input type="submit" value="Create product"></td></tr>
             <tr><td> <input type="button" value="Create Product Async" onclick="CreateProduct()"></td></tr>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+
+<input type="text" id="CustomerName" name="CustomerName" placehoder="Customer Name" onchange="fillCustomerSelectBox()"/><br>
+<select id="customers" name="customers" ></select>
+<style>
+    #customers{
+        width:150px;
+    }
+
+</style>
+
+<script>
+
+    function fillCustomerSelectBox(){
+        customers =   [{"text":"Dimitris", "value":"1"}, {"text":"George", "value":"2"}, {"text":"Nikos", "value":"4"}];
+
+        $("#customers").empty();
+         $.each(customers, function(index,value) {
+            if ( value.text.includes($("#CustomerName").val())) {
+                option = new Option(value.text, value.value);
+                $("#customers").append(option);
+            }
+         });
+        $("#customers").show().focus().click();
+    }
+
+
+</script>
+
+</body>
+</html>

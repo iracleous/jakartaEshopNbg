@@ -1,4 +1,5 @@
 var url = "http://localhost:8080/NbgEshop/api/product";
+
 function CreateProduct() {
 
     document.getElementById("resultDiv").innerHTML = '';
