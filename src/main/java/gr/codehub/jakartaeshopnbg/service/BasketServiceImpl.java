@@ -5,7 +5,7 @@ import gr.codehub.jakartaeshopnbg.dto.BasketProductDto;
 import gr.codehub.jakartaeshopnbg.model.Basket;
 import gr.codehub.jakartaeshopnbg.model.Customer;
 import gr.codehub.jakartaeshopnbg.repository.BasketRepository;
-import gr.codehub.jakartaeshopnbg.repository.CustomerRepository;
+import gr.codehub.jakartaeshopnbg.repository.CustomerRepositoryImpl;
 import gr.codehub.jakartaeshopnbg.repository.ProductRepository;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -18,7 +18,7 @@ public class BasketServiceImpl implements BasketService{
     @Inject
     private BasketRepository basketRepository;
     @Inject
-    private CustomerRepository customerRepository;
+    private CustomerRepositoryImpl customerRepository;
 
     @Inject
     private ProductRepository productRepository;

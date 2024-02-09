@@ -8,7 +8,7 @@ import java.util.List;
 public class GenericServiceImpl<T,K> implements GenericService<T,K>  {
 
     @Inject
-    private GenericRepository<T,K> genRepository;
+    protected GenericRepository<T,K> genRepository;
     @Override
     public T createT(T t) {
         return genRepository.save(t).get();

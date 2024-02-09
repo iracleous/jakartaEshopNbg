@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+
+<form onsubmit="return false">
+
+
+
+    <Select id="AvailableProducts" size="5">
+        <option value="1">Chips</option>
+        <option  value="2"> Chocolate</option>
+        <option  value="3"> Milk</option>
+
+    </Select> <br />  <br />
+    <button id="AddProduct" onclick="addProduct()">Add Product</button> <br />  <br />
+    <button id="RemoveProduct" onclick="removeProduct()">Remove Product</button> <br />  <br />
+
+    <Select id="BasketProducts" style="width: 400px" size="5">
+    </Select>
+</form>
+
+
+<script>
+    function addProduct(){
+
+       var text = $('#AvailableProducts').find(":selected").text();
+       var value =  $('#AvailableProducts').find(":selected").val();
+
+        option = new Option(text, value);
+
+        $('#BasketProducts').append(option);
+        event.preventDefault()
+
+    }
+
+    function removeProduct(){
+        selectedProduct =  $("#BasketProducts option:selected").val();
+        alert(selectedProduct)
+        $("#BasketProducts option [value="+selectedProduct+"]").remove();
+
+        event.preventDefault()
+    }
+
+</script>
+
+
+</body>
+</html>

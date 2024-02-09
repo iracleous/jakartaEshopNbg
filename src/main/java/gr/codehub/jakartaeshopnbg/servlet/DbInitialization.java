@@ -24,13 +24,33 @@ public class DbInitialization extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Customer customer =  Customer
+             customerService.createT( Customer
                 .builder()
                 .name("Nikos")
                 .email("nikos@gmail.com")
-                .build();
+                .build());
+        customerService.createT( Customer
+                .builder()
+                .name("Nikos Nikou")
+                .email("nikos@gmail.com")
+                .build());
+        customerService.createT( Customer
+                .builder()
+                .name("Dimitris")
+                .email("nikos@gmail.com")
+                .build());
+        customerService.createT( Customer
+                .builder()
+                .name("George")
+                .email("nikos@gmail.com")
+                .build());
 
-        customerService.createT(customer);
+        customerService.createT( Customer
+                .builder()
+                .name("George George")
+                .email("nikos@gmail.com")
+                .build());
+
 
         Product product1 = Product
                 .builder()

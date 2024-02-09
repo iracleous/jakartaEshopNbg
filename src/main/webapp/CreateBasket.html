@@ -7,8 +7,14 @@
 </head>
 <body>
 <label></label>
-<input type="text" id="CustomerName" name="CustomerName" placehoder="Customer Name"/><br>
+<label value="Customer Name" />
+<input type="text" id="CustomerName" name="CustomerName" placeholder="Customer Name"/><br>
 <select id="customers" name="customers"  size="3"></select>
+
+<button value="" onclick="">Add products</button>
+
+
+
 <style>
     #customers{
         width:150px;
@@ -19,17 +25,11 @@
 <script>
 
     $(document).ready(   function() {
-            $('#CustomerName').on('input', fillCustomerSelectBox);
+            $('#CustomerName').on('input', getCustomers);
     });
 
-    function fillCustomerSelectBox(){
-        var customers =   [{"text":"Dimitris", "value":"1"},
-            {"text":"Dimitris1", "value":"5"},
-            {"text":"Dimitris2", "value":"6"},
-            {"text":"George", "value":"2"},
-            {"text":"Nikos", "value":"4"},
-            {"text":"Nikos4", "value":"8"}
-        ];
+    function fillCustomerSelectBox(customers){
+
         $("#customers").empty();
         if  ($('#CustomerName').val()!="")
             $.each(customers, function(index,value) {
@@ -43,6 +43,58 @@
                 $('#CustomerName').focus();
             });
     }
+
+
+    function getCustomers(){
+
+        url="http://localhost:8080/NbgEshop/api/customer/customers/"
+            +$("#CustomerName").val();
+
+        var customers =   [{"text":"Dimitris", "value":"1"},
+            {"text":"Dimitris1", "value":"5"},
+            {"text":"Dimitris2", "value":"6"},
+            {"text":"George", "value":"2"},
+            {"text":"Nikos", "value":"4"},
+            {"text":"Nikos4", "value":"8"}
+        ];
+
+
+
+        fetch(url, {
+            method: "GET", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: "same-origin", // include, *same-origin, omit
+            headers: {
+                "Content-Type": "application/json",
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      //      body: JSON.stringify(data), // body data type must match "Content-Type" header
+        })
+            .then(res => res.json())
+            .then(customers => {
+
+                fillCustomerSelectBox(customers);
+
+            })
+            .catch(error => {
+                if (error instanceof TypeError && error.message.includes('API key')) {
+                    console.error('Invalid API key:', error);
+                    document.getElementById("resultDiv").innerHTML = 'Invalid API key:' + error;
+                } else {
+                    console.error('There was a problem with the Fetch operation:', error);
+                    document.getElementById("resultDiv").innerHTML = 'here was a problem with the Fetch operation:';
+                }
+            });
+
+
+
+    }
+
+
+
 
 </script>
 

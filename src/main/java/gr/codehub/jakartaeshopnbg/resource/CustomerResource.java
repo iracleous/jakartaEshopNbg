@@ -1,5 +1,6 @@
 package gr.codehub.jakartaeshopnbg.resource;
 
+import gr.codehub.jakartaeshopnbg.dto.SelectBoxDto;
 import gr.codehub.jakartaeshopnbg.model.Customer;
 import gr.codehub.jakartaeshopnbg.service.CustomerService;
 import jakarta.inject.Inject;
@@ -55,5 +56,15 @@ public class CustomerResource {
     public boolean deleteCustomer(@PathParam(value="customerId") long customerId){
         return customerService.deleteT( customerId);
     }
+
+
+    @GET
+    @Path("/customers/{starting}")
+    @Produces("Application/json")
+    @Consumes("Application/json")
+    public List<SelectBoxDto> getCustomers(@PathParam(value="starting")  String starting){
+        return customerService.getCustomers(starting);
+    }
+
 
 }
