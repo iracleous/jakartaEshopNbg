@@ -20,8 +20,7 @@ public class UtilsRs {
     public List<ProductCategoryDto> getProductCategories(){
 
          return   Arrays
-                 .asList(ProductCategory.values())
-                 .stream()
+                 .stream(ProductCategory.values())
                  .map(category-> new ProductCategoryDto(category.name(), category.name()))
                  .collect(Collectors.toList());
     }

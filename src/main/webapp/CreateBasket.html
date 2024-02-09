@@ -6,9 +6,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-
-<input type="text" id="CustomerName" name="CustomerName" placehoder="Customer Name" onchange="fillCustomerSelectBox()"/><br>
-<select id="customers" name="customers" ></select>
+<label></label>
+<input type="text" id="CustomerName" name="CustomerName" placehoder="Customer Name"/><br>
+<select id="customers" name="customers"  size="3"></select>
 <style>
     #customers{
         width:150px;
@@ -18,19 +18,31 @@
 
 <script>
 
+    $(document).ready(   function() {
+            $('#CustomerName').on('input', fillCustomerSelectBox);
+    });
+
     function fillCustomerSelectBox(){
-        customers =   [{"text":"Dimitris", "value":"1"}, {"text":"George", "value":"2"}, {"text":"Nikos", "value":"4"}];
-
+        var customers =   [{"text":"Dimitris", "value":"1"},
+            {"text":"Dimitris1", "value":"5"},
+            {"text":"Dimitris2", "value":"6"},
+            {"text":"George", "value":"2"},
+            {"text":"Nikos", "value":"4"},
+            {"text":"Nikos4", "value":"8"}
+        ];
         $("#customers").empty();
-         $.each(customers, function(index,value) {
-            if ( value.text.includes($("#CustomerName").val())) {
-                option = new Option(value.text, value.value);
-                $("#customers").append(option);
-            }
-         });
-        $("#customers").show().focus().click();
-    }
+        if  ($('#CustomerName').val()!="")
+            $.each(customers, function(index,value) {
+                if ( value.text.toLowerCase().includes(   $("#CustomerName").val(). toLowerCase())) {
+                    option = new Option(value.text, value.value);
+                    $("#customers").append(option);
 
+
+                }
+                $('#customers').focus();
+                $('#CustomerName').focus();
+            });
+    }
 
 </script>
 
