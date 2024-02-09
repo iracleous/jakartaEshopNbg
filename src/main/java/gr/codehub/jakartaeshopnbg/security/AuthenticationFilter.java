@@ -1,6 +1,8 @@
 package gr.codehub.jakartaeshopnbg.security;
 
 import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ResourceInfo;
 import jakarta.ws.rs.core.Context;
@@ -9,9 +11,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
 
 import java.lang.reflect.Method;
-import java.util.Base64;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 @Provider
 public class AuthenticationFilter implements jakarta.ws.rs.container.ContainerRequestFilter {
@@ -23,8 +23,15 @@ public class AuthenticationFilter implements jakarta.ws.rs.container.ContainerRe
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
+
+
+//        GET http://localhost:8080/NbgEshop/api/secured/auth
+//        Authorization: Basic RGltaXRyaXM6MTIz
+
+
+
         Method method = resourceInfo.getResourceMethod();
-        if (method.isAnnotationPresent(PermitAll.class)){
+        if (method.isAnnotationPresent(PermitAll.class) || !method.isAnnotationPresent(RolesAllowed.class)){
             return;
         }
         final MultivaluedMap<String, String> headers = requestContext.getHeaders();
@@ -48,16 +55,36 @@ public class AuthenticationFilter implements jakarta.ws.rs.container.ContainerRe
             final String password = tokenizer.nextToken();
 
             if (!username.equals("Dimitris") || !password.equals("123")){
-                String role="ADMIN";
-
-                requestContext
+                         requestContext
                         .abortWith(Response
                                 .status(Response.Status.UNAUTHORIZED)
                                 .entity("You cannot access this resource")
                                 .build());
                 return;
             }
+            String role="ADMIN"; // is obtained from DB
+             RolesAllowed rolesAnnotation = method.getAnnotation(RolesAllowed.class);
+            Set<String> rolesSetForTheResource = new HashSet<>(Arrays.asList(rolesAnnotation.value()));
+        //Is user valid?
+                if (!isUserAllowed(username, password,   rolesSetForTheResource)) {
+                    requestContext.abortWith(Response
+                            .status(Response.Status.UNAUTHORIZED)
+                            .entity("You cannot access this resource")
+                            .build());
+                    return;
+                }
 
+    }
 
+    private boolean isUserAllowed(final String username, final String password,  final Set<String> rolesSetExpected) {
+
+        String userRole ="ADMIN";
+        boolean isAllowed = false;
+        if (username.equals("Dimitris") && password.equals("123")) {
+            if (rolesSetExpected.contains(userRole)) {
+                isAllowed = true;
+            }
+        }
+        return isAllowed;
     }
 }
